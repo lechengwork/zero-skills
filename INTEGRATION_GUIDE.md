@@ -79,9 +79,9 @@ func readResource(uri string) (string, error) {
     // Option 1: Embed files at build time
     // Option 2: Fetch from GitHub at runtime
     // Option 3: Clone repo on first use and cache locally
-    
+
     baseURL := "https://raw.githubusercontent.com/zeromicro/zero-skills/main/"
-    
+
     switch uri {
     case "zero-skills://patterns/rest-api":
         return fetchFromGitHub(baseURL + "patterns/rest-api-patterns.md")
