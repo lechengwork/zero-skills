@@ -2,42 +2,52 @@
 
 English | [简体中文](README_CN.md)
 
-This repository contains structured knowledge and patterns for AI coding assistants to help developers work effectively with the [go-zero](https://github.com/zeromicro/go-zero) framework.
+This is an [Agent Skill](https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) containing structured knowledge and patterns for AI coding assistants to help developers work effectively with the [go-zero](https://github.com/zeromicro/go-zero) framework.
+
+## What is a Skill?
+
+Skills are folders of instructions, scripts, and resources that AI agents discover and load dynamically to perform better at specific tasks. This skill teaches AI agents how to generate production-ready go-zero microservices code.
 
 ## Purpose
 
-These materials are optimized for AI agents (Claude, GitHub Copilot, Cursor, etc.) to:
+This skill enables AI agents (Claude, GitHub Copilot, Cursor, etc.) to:
 - Generate accurate go-zero code following framework conventions
-- Provide context-aware suggestions and completions
-- Help developers follow best practices
-- Troubleshoot common issues
+- Understand the three-layer architecture (Handler → Logic → Model)
+- Apply best practices for microservices development
+- Troubleshoot common issues efficiently
+- Build production-ready applications
 
-## Structure
+## Agent Skill Structure
+
+Following the [Agent Skills Spec](https://github.com/anthropics/skills/blob/main/spec/agent-skills-spec.md):
 
 ```
-zero-skills/
-├── getting-started/     # Quick start guides for common tasks
-├── patterns/            # Framework-specific patterns and conventions
-├── examples/            # Complete working examples
-├── best-practices/      # Production-ready recommendations
-├── troubleshooting/     # Common issues and solutions
-└── reference/           # API references and configurations
+go-zero-skills/
+├── SKILL.md                    # Entry point with YAML frontmatter
+├── getting-started/            # Quick start guides
+├── references/                 # Detailed pattern documentation
+│   ├── rest-api-patterns.md    # REST API development patterns
+│   ├── rpc-patterns.md         # gRPC service patterns  
+│   ├── database-patterns.md    # Database operations
+│   └── resilience-patterns.md  # Resilience and fault tolerance
+├── best-practices/             # Production recommendations
+├── troubleshooting/            # Common issues and solutions
+├── articles/                   # In-depth guides
+└── examples/                   # Demo projects and verification scripts
 ```
 
-## For AI Agents
+## Using This Skill
 
-When assisting with go-zero development:
-1. Start with `patterns/` to understand framework conventions
-2. Reference `examples/` for complete working code
-3. Follow `best-practices/` for production-quality code
-4. Use `troubleshooting/` for error resolution
+### With Claude Desktop/Code
 
-## For Developers
+This skill works automatically when loaded into Claude. See [SKILL.md](SKILL.md) for the complete guide.
 
-To use these materials with your AI coding assistant:
-1. Reference this repository in your AI agent's context
-2. Ask specific questions about go-zero patterns
-3. Request code generation following these patterns
+### With Other AI Assistants
+
+Reference the skill in your AI context:
+1. For **GitHub Copilot**: Use [ai-context](https://github.com/zeromicro/ai-context) which links to this skill
+2. For **Cursor/Windsurf**: Add as project rules (see [AI Ecosystem Guide](articles/ai-ecosystem-guide.md))
+3. For **API usage**: Include relevant pattern files from `references/` in your prompts
 
 ## Integration with go-zero AI Ecosystem
 

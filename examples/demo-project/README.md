@@ -103,12 +103,12 @@ demo-workspace/
        if req.Username == "" {
            return nil, errors.New("username is required")
        }
-       
+
        // 验证邮箱格式
        if req.Email == "" {
            return nil, errors.New("email is required")
        }
-       
+
        // TODO: 保存到数据库
        user := types.User{
            Id:       1,
@@ -116,7 +116,7 @@ demo-workspace/
            Email:    req.Email,
            CreateAt: time.Now().Format("2006-01-02 15:04:05"),
        }
-       
+
        return &types.CreateUserResponse{
            User: user,
        }, nil
@@ -130,9 +130,9 @@ demo-workspace/
 2. 输入：
    ```go
    package middleware
-   
+
    import "net/http"
-   
+
    // JWT 认证中间件
    ```
 

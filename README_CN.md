@@ -2,60 +2,52 @@
 
 [English](README.md) | 简体中文
 
-这个仓库包含为 AI 编程助手（Claude、GitHub Copilot、Cursor 等）优化的 go-zero 框架知识和模式，帮助开发者更高效地使用 go-zero 构建微服务应用。
+这是一个 [Agent Skill（智能体技能）](https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)，包含为 AI 编程助手优化的 go-zero 框架知识和模式，帮助开发者更高效地构建微服务应用。
+
+## 什么是 Skill？
+
+Skills 是包含指令、脚本和资源的文件夹，AI 智能体可以动态发现和加载，以更好地完成特定任务。这个 skill 教会 AI 智能体如何生成生产级的 go-zero 微服务代码。
 
 ## 目标
 
-为 AI 助手提供结构化的 go-zero 知识，使其能够：
+本 skill 使 AI 助手（Claude、GitHub Copilot、Cursor 等）能够：
 - 生成符合 go-zero 规范的准确代码
-- 提供上下文相关的建议和补全
-- 帮助开发者遵循最佳实践
-- 快速解决常见问题
+- 理解三层架构（Handler → Logic → Model）
+- 应用微服务开发最佳实践
+- 高效排查常见问题
+- 构建生产就绪的应用
 
-## 目录结构
+## Agent Skill 结构
+
+遵循 [Agent Skills 规范](https://github.com/anthropics/skills/blob/main/spec/agent-skills-spec.md)：
 
 ```
-zero-skills/
-├── getting-started/     # 快速开始指南
-├── patterns/            # 框架特定的模式和约定
-│   ├── rest-api-patterns.md      # REST API 完整模式
-│   ├── rpc-patterns.md           # RPC 服务模式
-│   ├── database-patterns.md      # 数据库操作模式
-│   └── resilience-patterns.md    # 弹性保护模式
-├── best-practices/      # 生产级最佳实践
-├── troubleshooting/     # 常见问题和解决方案
-└── articles/            # 深度文章和教程
+go-zero-skills/
+├── SKILL.md                    # 入口文件，包含 YAML 元数据
+├── getting-started/            # 快速开始指南
+├── references/                 # 详细模式文档
+│   ├── rest-api-patterns.md    # REST API 开发模式
+│   ├── rpc-patterns.md         # gRPC 服务模式
+│   ├── database-patterns.md    # 数据库操作
+│   └── resilience-patterns.md  # 弹性和容错
+├── best-practices/             # 生产级建议
+├── troubleshooting/            # 常见问题和解决方案
+├── articles/                   # 深度指南
+└── examples/                   # 演示项目和验证脚本
 ```
 
-## 给 AI 助手的说明
+## 使用这个 Skill
 
-在协助 go-zero 开发时：
-1. 从 `patterns/` 开始了解框架约定
-2. 参考 `examples/` 获取完整的工作代码
-3. 遵循 `best-practices/` 生成生产级代码
-4. 使用 `troubleshooting/` 解决错误
+### 在 Claude Desktop/Code 中使用
 
-## 给开发者的说明
+加载到 Claude 后，此 skill 会自动工作。完整指南请参阅 [SKILL.md](SKILL.md)。
 
-### 与 GitHub Copilot 配合使用
+### 在其他 AI 助手中使用
 
-在项目的 `.github/` 目录中引用这个仓库：
-
-```markdown
-## go-zero 开发指南
-
-参考 zero-skills 仓库的详细模式：
-- REST API: https://github.com/zeromicro/zero-skills/blob/main/patterns/rest-api-patterns.md
-- RPC 服务: https://github.com/zeromicro/zero-skills/blob/main/patterns/rpc-patterns.md
-```
-
-### 与 Claude Desktop 配合使用
-
-配合 [mcp-zero](https://github.com/zeromicro/mcp-zero) 使用，Claude 可以直接访问这些模式。
-
-### 与 Cursor 配合使用
-
-在 Cursor 的项目规则中引用 zero-skills 的 URL，让 AI 了解 go-zero 最佳实践。
+在 AI 上下文中引用这个 skill：
+1. **GitHub Copilot**：使用 [ai-context](https://github.com/zeromicro/ai-context)，它会链接到这个 skill
+2. **Cursor/Windsurf**：作为项目规则添加（参见 [AI 生态指南](articles/ai-ecosystem-guide.md)）
+3. **API 使用**：在提示词中包含 `references/` 中的相关模式文件
 
 ## 特色功能
 

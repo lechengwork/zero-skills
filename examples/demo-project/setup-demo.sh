@@ -132,11 +132,11 @@ service user-api {
 	@doc "创建用户"
 	@handler CreateUser
 	post /api/users (CreateUserRequest) returns (CreateUserResponse)
-	
+
 	@doc "获取用户详情"
 	@handler GetUser
 	get /api/users/:id (GetUserRequest) returns (GetUserResponse)
-	
+
 	@doc "获取用户列表"
 	@handler ListUsers
 	get /api/users (ListUsersRequest) returns (ListUsersResponse)

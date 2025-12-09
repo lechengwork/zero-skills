@@ -98,9 +98,9 @@ func (l *CreateUserLogic) CreateUser(req *types.CreateUserRequest) (*types.Creat
 ### 架构图
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│           AI 编程助手 (Claude/Copilot/Cursor)            │
-└────────────┬────────────────────────────────────────────┘
+┌────────────────────────────────────┐
+│ AI 编程助手 (Claude/Copilot/Cursor) │
+└────────────┬───────────────────────┘
              │
     ┌────────┴─────────┐
     │                  │
@@ -245,6 +245,38 @@ Claude：好的，我将使用 mcp-zero 工具创建服务...
 服务创建成功！接下来我将实现用户相关的 handler...
 [参考 zero-skills 中的模式生成代码]
 ```
+
+### 配置 Claude Code (命令行)
+
+如果使用 Claude Code CLI，可以直接用命令添加 MCP 服务器：
+
+```bash
+# 添加 mcp-zero 服务器
+claude mcp add \
+  --transport stdio \
+  mcp-zero \
+  --env GOCTL_PATH=/Users/yourname/go/bin/goctl \
+  -- /path/to/mcp-zero
+
+# 或者如果 mcp-zero 在系统 PATH 中
+claude mcp add \
+  --transport stdio \
+  mcp-zero \
+  --env GOCTL_PATH=/Users/yourname/go/bin/goctl \
+  -- mcp-zero
+
+# 列出已配置的 MCP 服务器
+claude mcp list
+
+# 移除服务器
+claude mcp remove mcp-zero
+```
+
+**优势：**
+- ✅ 命令行配置，无需手动编辑 JSON
+- ✅ 自动管理配置文件
+- ✅ 支持环境变量设置
+- ✅ 便于脚本化部署
 
 ### 配置 Cursor
 
