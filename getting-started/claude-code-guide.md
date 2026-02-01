@@ -106,7 +106,7 @@ Current services in this project:
 
 The commands execute before Claude sees the prompt, injecting actual file paths.
 
-See [examples/claude-code-patterns/analyze-project.md](../examples/claude-code-patterns/analyze-project.md) for a complete example.
+See [skill-patterns/analyze-project.md](../skill-patterns/analyze-project.md) for a complete example.
 
 ### Subagent Workflows
 
@@ -128,7 +128,7 @@ Benefits:
 - Read-only tools prevent accidental modifications
 - Focused analysis without distractions
 
-See [examples/claude-code-patterns/analyze-project.md](../examples/claude-code-patterns/analyze-project.md) for details.
+See [skill-patterns/analyze-project.md](../skill-patterns/analyze-project.md) for details.
 
 #### Plan Agent (Architecture Design)
 ```yaml
@@ -146,7 +146,7 @@ Benefits:
 - No code execution (prevents premature implementation)
 - Fresh perspective on architecture
 
-See [examples/claude-code-patterns/plan-architecture.md](../examples/claude-code-patterns/plan-architecture.md) for details.
+See [skill-patterns/plan-architecture.md](../skill-patterns/plan-architecture.md) for details.
 
 ### Tool Restrictions
 
@@ -196,16 +196,16 @@ Access arguments:
 - `$ARGUMENTS`: All arguments combined
 - `${CLAUDE_SESSION_ID}`: Current session ID
 
-See [examples/claude-code-patterns/generate-service.md](../examples/claude-code-patterns/generate-service.md) for details.
+See [skill-patterns/generate-service.md](../skill-patterns/generate-service.md) for details.
 
 ## Skill Pattern Examples
 
-See [examples/claude-code-patterns/](../examples/claude-code-patterns/) for advanced skill patterns:
+See [skill-patterns/](../skill-patterns/) for advanced skill patterns:
 
-- **[analyze-project.md](../examples/claude-code-patterns/analyze-project.md)** - Explore agent with dynamic context
-- **[generate-service.md](../examples/claude-code-patterns/generate-service.md)** - Argument passing patterns
-- **[plan-architecture.md](../examples/claude-code-patterns/plan-architecture.md)** - Plan agent for design
-- **[README.md](../examples/claude-code-patterns/README.md)** - Full guide with best practices
+- **[analyze-project.md](../skill-patterns/analyze-project.md)** - Explore agent with dynamic context
+- **[generate-service.md](../skill-patterns/generate-service.md)** - Argument passing patterns
+- **[plan-architecture.md](../skill-patterns/plan-architecture.md)** - Plan agent for design
+- **[README.md](../skill-patterns/README.md)** - Full guide with best practices
 
 ## Example Workflows
 
