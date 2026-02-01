@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# 验证 AI 工具生态配置教程的演示脚本
 # Demo script to verify AI ecosystem tutorial configurations
 
 set -e  # Exit on error
@@ -8,24 +7,23 @@ set -e  # Exit on error
 DEMO_DIR="/tmp/zero-skills-demo-$$"
 RESULTS_FILE="$DEMO_DIR/verification-results.txt"
 
-# 颜色定义
+# Color definitions
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 echo "================================================"
-echo "零技能 AI 工具生态配置验证脚本"
 echo "Zero-Skills AI Ecosystem Tutorial Verification"
 echo "================================================"
 echo ""
 
-# 创建临时目录
+# Create temporary directory
 mkdir -p "$DEMO_DIR"
-echo "✓ 创建测试目录: $DEMO_DIR"
+echo "✓ Created test directory: $DEMO_DIR"
 echo ""
 
-# 记录结果函数
+# Log result function
 log_result() {
     local test_name=$1
     local status=$2
@@ -41,152 +39,152 @@ log_result() {
     echo ""
 }
 
-# 测试 1: GitHub Copilot 配置
+# Test 1: GitHub Copilot Configuration
 test_github_copilot() {
-    echo "=== 测试 1: GitHub Copilot 配置 ==="
+    echo "=== Test 1: GitHub Copilot Configuration ==="
     local test_dir="$DEMO_DIR/copilot-test"
     mkdir -p "$test_dir"
     cd "$test_dir"
 
-    # 初始化 git 仓库
+    # Initialize git repository
     git init -q
 
-    # 添加 ai-context 作为 submodule
+    # Add ai-context as submodule
     if git submodule add -q https://github.com/zeromicro/ai-context.git .github/ai-context 2>/dev/null; then
-        # 创建符号链接
+        # Create symlink
         mkdir -p .github
         ln -s ai-context/00-instructions.md .github/copilot-instructions.md
 
-        # 验证文件存在
+        # Verify file exists
         if [ -L ".github/copilot-instructions.md" ] && [ -e ".github/copilot-instructions.md" ]; then
-            # 验证内容
+            # Verify content
             if grep -q "go-zero" .github/copilot-instructions.md; then
-                log_result "GitHub Copilot 配置" "PASS" "Submodule 添加成功，符号链接创建成功，内容验证通过"
+                log_result "GitHub Copilot Configuration" "PASS" "Submodule added, symlink created, content verified"
                 return 0
             else
-                log_result "GitHub Copilot 配置" "FAIL" "文件内容不包含 go-zero 相关内容"
+                log_result "GitHub Copilot Configuration" "FAIL" "File content does not contain go-zero related content"
                 return 1
             fi
         else
-            log_result "GitHub Copilot 配置" "FAIL" "符号链接创建失败或文件不存在"
+            log_result "GitHub Copilot Configuration" "FAIL" "Symlink creation failed or file does not exist"
             return 1
         fi
     else
-        log_result "GitHub Copilot 配置" "FAIL" "Submodule 添加失败"
+        log_result "GitHub Copilot Configuration" "FAIL" "Submodule add failed"
         return 1
     fi
 }
 
-# 测试 2: Cursor 配置
+# Test 2: Cursor Configuration
 test_cursor() {
-    echo "=== 测试 2: Cursor 配置 ==="
+    echo "=== Test 2: Cursor Configuration ==="
     local test_dir="$DEMO_DIR/cursor-test"
     mkdir -p "$test_dir"
     cd "$test_dir"
 
-    # 初始化 git 仓库
+    # Initialize git repository
     git init -q
 
-    # 添加 ai-context 作为 submodule
+    # Add ai-context as submodule
     if git submodule add -q https://github.com/zeromicro/ai-context.git .cursorrules 2>/dev/null; then
-        # 验证目录和文件存在
+        # Verify directory and file exist
         if [ -d ".cursorrules" ] && [ -f ".cursorrules/00-instructions.md" ]; then
-            # 验证内容
+            # Verify content
             if grep -q "go-zero" .cursorrules/00-instructions.md; then
-                # 统计 .md 文件数量
+                # Count .md files
                 md_count=$(find .cursorrules -name "*.md" -type f | wc -l)
-                log_result "Cursor 配置" "PASS" "Submodule 添加成功，找到 $md_count 个 .md 文件"
+                log_result "Cursor Configuration" "PASS" "Submodule added, found $md_count .md files"
                 return 0
             else
-                log_result "Cursor 配置" "FAIL" "文件内容不包含 go-zero 相关内容"
+                log_result "Cursor Configuration" "FAIL" "File content does not contain go-zero related content"
                 return 1
             fi
         else
-            log_result "Cursor 配置" "FAIL" ".cursorrules 目录或文件不存在"
+            log_result "Cursor Configuration" "FAIL" ".cursorrules directory or file does not exist"
             return 1
         fi
     else
-        log_result "Cursor 配置" "FAIL" "Submodule 添加失败"
+        log_result "Cursor Configuration" "FAIL" "Submodule add failed"
         return 1
     fi
 }
 
-# 测试 3: Windsurf 配置
+# Test 3: Windsurf Configuration
 test_windsurf() {
-    echo "=== 测试 3: Windsurf 配置 ==="
+    echo "=== Test 3: Windsurf Configuration ==="
     local test_dir="$DEMO_DIR/windsurf-test"
     mkdir -p "$test_dir"
     cd "$test_dir"
 
-    # 初始化 git 仓库
+    # Initialize git repository
     git init -q
 
-    # 添加 ai-context 作为 submodule
+    # Add ai-context as submodule
     if git submodule add -q https://github.com/zeromicro/ai-context.git .windsurfrules 2>/dev/null; then
-        # 验证目录和文件存在
+        # Verify directory and file exist
         if [ -d ".windsurfrules" ] && [ -f ".windsurfrules/00-instructions.md" ]; then
-            # 验证内容
+            # Verify content
             if grep -q "go-zero" .windsurfrules/00-instructions.md; then
-                # 统计 .md 文件数量
+                # Count .md files
                 md_count=$(find .windsurfrules -name "*.md" -type f | wc -l)
-                log_result "Windsurf 配置" "PASS" "Submodule 添加成功，找到 $md_count 个 .md 文件"
+                log_result "Windsurf Configuration" "PASS" "Submodule added, found $md_count .md files"
                 return 0
             else
-                log_result "Windsurf 配置" "FAIL" "文件内容不包含 go-zero 相关内容"
+                log_result "Windsurf Configuration" "FAIL" "File content does not contain go-zero related content"
                 return 1
             fi
         else
-            log_result "Windsurf 配置" "FAIL" ".windsurfrules 目录或文件不存在"
+            log_result "Windsurf Configuration" "FAIL" ".windsurfrules directory or file does not exist"
             return 1
         fi
     else
-        log_result "Windsurf 配置" "FAIL" "Submodule 添加失败"
+        log_result "Windsurf Configuration" "FAIL" "Submodule add failed"
         return 1
     fi
 }
 
-# 测试 4: Submodule 更新
+# Test 4: Submodule Update
 test_submodule_update() {
-    echo "=== 测试 4: Submodule 更新功能 ==="
+    echo "=== Test 4: Submodule Update ==="
     local test_dir="$DEMO_DIR/update-test"
     mkdir -p "$test_dir"
     cd "$test_dir"
 
-    # 初始化 git 仓库并添加 submodule
+    # Initialize git repository and add submodule
     git init -q
     git submodule add -q https://github.com/zeromicro/ai-context.git .github/ai-context 2>/dev/null
 
-    # 记录初始 commit hash
+    # Record initial commit hash
     cd .github/ai-context
     initial_commit=$(git rev-parse HEAD)
     cd ../..
 
-    # 尝试更新
+    # Try to update
     if git submodule update --remote .github/ai-context 2>/dev/null; then
         cd .github/ai-context
         updated_commit=$(git rev-parse HEAD)
         cd ../..
 
-        log_result "Submodule 更新" "PASS" "更新成功 (commit: ${updated_commit:0:8})"
+        log_result "Submodule Update" "PASS" "Update successful (commit: ${updated_commit:0:8})"
         return 0
     else
-        log_result "Submodule 更新" "FAIL" "Submodule 更新失败"
+        log_result "Submodule Update" "FAIL" "Submodule update failed"
         return 1
     fi
 }
 
-# 测试 5: 验证 ai-context 内容结构
+# Test 5: Verify ai-context Content Structure
 test_content_structure() {
-    echo "=== 测试 5: 验证 ai-context 内容结构 ==="
+    echo "=== Test 5: Verify ai-context Content Structure ==="
     local test_dir="$DEMO_DIR/content-test"
     mkdir -p "$test_dir"
     cd "$test_dir"
 
-    # 初始化并克隆
+    # Initialize and clone
     git init -q
     git submodule add -q https://github.com/zeromicro/ai-context.git .ai-context 2>/dev/null
 
-    # 验证关键内容
+    # Verify key content
     local required_sections=(
         "Decision Tree"
         "File Priority"
@@ -202,26 +200,26 @@ test_content_structure() {
     done
 
     if [ ${#missing_sections[@]} -eq 0 ]; then
-        log_result "内容结构验证" "PASS" "所有必需章节都存在"
+        log_result "Content Structure" "PASS" "All required sections exist"
         return 0
     else
-        log_result "内容结构验证" "FAIL" "缺少章节: ${missing_sections[*]}"
+        log_result "Content Structure" "FAIL" "Missing sections: ${missing_sections[*]}"
         return 1
     fi
 }
 
-# 测试 6: 验证 zero-skills 引用
+# Test 6: Verify zero-skills References
 test_zero_skills_references() {
-    echo "=== 测试 6: 验证 zero-skills 引用 ==="
+    echo "=== Test 6: Verify zero-skills References ==="
     local test_dir="$DEMO_DIR/reference-test"
     mkdir -p "$test_dir"
     cd "$test_dir"
 
-    # 初始化并克隆
+    # Initialize and clone
     git init -q
     git submodule add -q https://github.com/zeromicro/ai-context.git .ai-context 2>/dev/null
 
-    # 验证 zero-skills 链接
+    # Verify zero-skills links
     local required_links=(
         "rest-api-patterns.md"
         "rpc-patterns.md"
@@ -237,23 +235,23 @@ test_zero_skills_references() {
     done
 
     if [ ${#missing_links[@]} -eq 0 ]; then
-        log_result "zero-skills 引用" "PASS" "所有模式文档引用都存在"
+        log_result "zero-skills References" "PASS" "All pattern document references exist"
         return 0
     else
-        log_result "zero-skills 引用" "FAIL" "缺少引用: ${missing_links[*]}"
+        log_result "zero-skills References" "FAIL" "Missing references: ${missing_links[*]}"
         return 1
     fi
 }
 
-# 运行所有测试
+# Run all tests
 main() {
-    echo "开始运行测试..."
+    echo "Running tests..."
     echo ""
 
     local total=0
     local passed=0
 
-    # 运行测试
+    # Run tests
     test_github_copilot && ((passed++)) || true
     ((total++))
 
@@ -272,40 +270,35 @@ main() {
     test_zero_skills_references && ((passed++)) || true
     ((total++))
 
-    # 输出总结
+    # Output summary
     echo "================================================"
-    echo "测试总结 / Test Summary"
+    echo "Test Summary"
     echo "================================================"
-    echo "总测试数 / Total Tests: $total"
-    echo -e "通过 / Passed: ${GREEN}$passed${NC}"
-    echo -e "失败 / Failed: ${RED}$((total - passed))${NC}"
+    echo "Total Tests: $total"
+    echo -e "Passed: ${GREEN}$passed${NC}"
+    echo -e "Failed: ${RED}$((total - passed))${NC}"
     echo ""
 
     if [ $passed -eq $total ]; then
-        echo -e "${GREEN}✓ 所有测试通过！教程验证成功！${NC}"
         echo -e "${GREEN}✓ All tests passed! Tutorial verified successfully!${NC}"
     else
-        echo -e "${YELLOW}⚠ 部分测试失败，请检查配置${NC}"
         echo -e "${YELLOW}⚠ Some tests failed, please check the configuration${NC}"
     fi
 
     echo ""
-    echo "详细结果保存在: $RESULTS_FILE"
-    echo "测试目录: $DEMO_DIR"
+    echo "Detailed results saved to: $RESULTS_FILE"
+    echo "Test directory: $DEMO_DIR"
     echo ""
 
-    # 自动清理临时目录
-    echo "正在清理临时测试目录..."
+    # Auto-cleanup temporary directory
     echo "Cleaning up temporary test directory..."
     if rm -rf "$DEMO_DIR" 2>/dev/null; then
-        echo -e "${GREEN}✓ 临时目录已清理${NC}"
         echo -e "${GREEN}✓ Temporary directory cleaned up${NC}"
     else
-        echo -e "${YELLOW}⚠ 无法自动清理，请手动删除:${NC} rm -rf $DEMO_DIR"
         echo -e "${YELLOW}⚠ Auto-cleanup failed, please delete manually:${NC} rm -rf $DEMO_DIR"
     fi
     echo ""
 }
 
-# 执行主函数
+# Execute main function
 main

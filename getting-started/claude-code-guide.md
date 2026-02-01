@@ -3,12 +3,62 @@
 This guide explains how to use zero-skills effectively with Claude Code, leveraging its advanced skills capabilities.
 
 ## Table of Contents
+- [Quick Reference](#quick-reference)
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
 - [Advanced Features](#advanced-features)
 - [Skill Pattern Examples](#skill-pattern-examples)
 - [Example Workflows](#example-workflows)
 - [Troubleshooting](#troubleshooting)
+- [Best Practices](#best-practices)
+
+---
+
+## Quick Reference
+
+### Commands
+
+| Command | Description |
+|---------|-------------|
+| `/zero-skills` | Load skill for go-zero help |
+| `/zero-skills [query]` | Load skill with specific question |
+| Ask "What skills are available?" | Check loaded skills |
+
+### Key Principles
+
+**Always Do:**
+- Handler → Logic → Model separation
+- Use `httpx.Error()` for HTTP errors
+- Load config with `conf.MustLoad`
+- Pass `ctx` through all layers
+- Generate code with `goctl`
+
+**Never Do:**
+- Put business logic in handlers
+- Hard-code configuration
+- Skip error handling
+- Bypass ServiceContext injection
+
+### Pattern Guides
+
+| Guide | When to Use |
+|-------|-------------|
+| [rest-api-patterns.md](../references/rest-api-patterns.md) | REST APIs, handlers, middleware |
+| [rpc-patterns.md](../references/rpc-patterns.md) | gRPC services, service discovery |
+| [database-patterns.md](../references/database-patterns.md) | SQL, MongoDB, Redis, caching |
+| [resilience-patterns.md](../references/resilience-patterns.md) | Circuit breakers, rate limiting |
+| [common-issues.md](../troubleshooting/common-issues.md) | Debugging errors |
+| [overview.md](../best-practices/overview.md) | Production hardening |
+
+### Integration with Other Tools
+
+| Tool | Purpose | Command/Usage |
+|------|---------|---------------|
+| **mcp-zero** | Execute goctl commands | Claude calls automatically |
+| **ai-context** | Quick workflows | GitHub Copilot integration |
+| **goctl** | Code generation | `goctl api go`, `goctl model`, etc. |
+
+---
 
 ## Installation
 
@@ -61,7 +111,7 @@ Claude automatically loads the skill when you:
 ```
 You: How do I create a REST API with go-zero?
 ```
-Claude loads zero-skills and provides detailed guidance from [references/rest-api-patterns.md](references/rest-api-patterns.md).
+Claude loads zero-skills and provides detailed guidance from [references/rest-api-patterns.md](../references/rest-api-patterns.md).
 
 ### Manual Invocation
 
@@ -217,7 +267,7 @@ See [skill-patterns/](../skill-patterns/) for advanced skill patterns:
 ```
 
 Claude:
-1. Loads [references/rest-api-patterns.md](references/rest-api-patterns.md)
+1. Loads [references/rest-api-patterns.md](../references/rest-api-patterns.md)
 2. Explains the `.api` file structure
 3. Shows example definitions
 4. Guides you through Handler → Logic → Model setup
@@ -227,14 +277,14 @@ Claude:
 You: How do I handle authentication in middleware?
 ```
 
-Claude references [references/rest-api-patterns.md](references/rest-api-patterns.md#middleware-patterns) and provides examples.
+Claude references [references/rest-api-patterns.md](../references/rest-api-patterns.md#middleware-patterns) and provides examples.
 
 **Step 3: Troubleshoot issues**
 ```
 You: I'm getting "http: named cookie not present" error
 ```
 
-Claude loads [troubleshooting/common-issues.md](troubleshooting/common-issues.md) and diagnoses the problem.
+Claude loads [troubleshooting/common-issues.md](../troubleshooting/common-issues.md) and diagnoses the problem.
 
 ### Workflow 2: Analyzing an Existing Project
 
@@ -315,7 +365,7 @@ This combines **knowledge** (zero-skills) with **execution** (mcp-zero).
 
 ### Commands in Skill Not Executing
 
-**Problem**: Dynamic context (`!`command"`) not working.
+**Problem**: Dynamic context (`!`command``) not working.
 
 **Possible causes**:
 1. Commands execute before Claude sees them (this is by design)
@@ -347,6 +397,15 @@ Files: !`ls -la`
 2. Add `disable-model-invocation: true` to prevent automatic loading
 3. Only invoke manually with `/zero-skills` when needed
 
+### Quick Troubleshooting Table
+
+| Problem | Solution |
+|---------|----------|
+| Skill not loading | Check: `What skills are available?` |
+| Not auto-triggering | Invoke manually: `/zero-skills` |
+| Need specific pattern | Ask: "Show me REST API middleware patterns" |
+| Want to analyze project | Say: "Analyze this go-zero project" |
+
 ## Best Practices
 
 ### 1. Use Specific Invocations
@@ -368,7 +427,7 @@ Don't load everything. Reference specific guides:
 You: How do I implement database transactions?
 ```
 
-Claude loads just [references/database-patterns.md](references/database-patterns.md), not the entire skill.
+Claude loads just [references/database-patterns.md](../references/database-patterns.md), not the entire skill.
 
 ### 3. Combine with mcp-zero
 
@@ -410,6 +469,13 @@ Create skills with `context: fork` for:
 - **Planning**: Use Plan agent for architecture design
 - **Isolation**: Keep experimental or risky operations separate
 
+## Learning Path
+
+1. **New to go-zero?** → [Official Quick Start](https://go-zero.dev/docs/quick-start)
+2. **Building APIs?** → [references/rest-api-patterns.md](../references/rest-api-patterns.md)
+3. **Adding database?** → [references/database-patterns.md](../references/database-patterns.md)
+4. **Production ready?** → [best-practices/overview.md](../best-practices/overview.md)
+
 ## Additional Resources
 
 - **Official docs**: [code.claude.com/docs/en/skills](https://code.claude.com/docs/en/skills)
@@ -427,4 +493,11 @@ Found an issue or want to improve zero-skills?
 
 ---
 
-**Quick reference**: Use `/zero-skills` for go-zero help, or let Claude load it automatically when you work with `.api` and `.proto` files.
+**Tips:**
+- Be specific: "Create a user API with authentication" > "Help me"
+- Reference files: ".api files" or "REST API" trigger automatic loading
+- Use mcp-zero: Combine knowledge (zero-skills) + execution (mcp-zero)
+- Create custom skills: Extend for project-specific patterns
+- Check examples: See [skill-patterns/](../skill-patterns/) for advanced usage
+
+**Need help?** Just ask Claude: "How do I [task] with go-zero?"

@@ -17,6 +17,24 @@ This skill enables AI agents (Claude, GitHub Copilot, Cursor, etc.) to:
 - Troubleshoot common issues efficiently
 - Build production-ready applications
 
+## Quick Install
+
+Just ask your AI agent:
+
+```
+Install zero-skills from https://github.com/zeromicro/zero-skills
+```
+
+Or manually:
+
+```bash
+# Project-level (recommended)
+git clone https://github.com/zeromicro/zero-skills.git .claude/skills/zero-skills
+
+# Personal-level (all projects)
+git clone https://github.com/zeromicro/zero-skills.git ~/.claude/skills/zero-skills
+```
+
 ## Agent Skill Structure
 
 Following the [Agent Skills Spec](https://github.com/anthropics/skills/blob/main/spec/agent-skills-spec.md) and [Claude Code skills documentation](https://code.claude.com/docs/en/skills):
@@ -24,9 +42,12 @@ Following the [Agent Skills Spec](https://github.com/anthropics/skills/blob/main
 ```
 zero-skills/
 ├── SKILL.md                    # Entry point with YAML frontmatter
-├── QUICKSTART.md               # Quick reference card
 ├── getting-started/            # Getting started guides
-│   └── claude-code-guide.md    # Using zero-skills with Claude Code
+│   ├── README.md               # Tool comparison overview
+│   ├── claude-code-guide.md    # Claude Code (recommended)
+│   ├── cursor-guide.md         # Cursor IDE
+│   ├── copilot-guide.md        # GitHub Copilot
+│   └── windsurf-guide.md       # Windsurf IDE
 ├── references/                 # Detailed pattern documentation
 │   ├── rest-api-patterns.md    # REST API development patterns
 │   ├── rpc-patterns.md         # gRPC service patterns
@@ -96,24 +117,33 @@ Add to `claude_desktop_config.json`:
 
 ### With GitHub Copilot
 
-Use [ai-context](https://github.com/zeromicro/ai-context) which provides concise workflow instructions that reference this skill. Add to `.github/copilot-instructions.md`:
+See [copilot-guide.md](getting-started/copilot-guide.md) for detailed setup. Quick start:
 
-```markdown
-# go-zero Development Context
-
-Follow go-zero patterns from https://github.com/zeromicro/zero-skills
-
-Key principles:
-- Three-layer architecture (Handler → Logic → Model)
-- Use goctl for code generation
-- See ai-context for workflows
+```bash
+git clone https://github.com/zeromicro/zero-skills.git .ai-context/zero-skills
 ```
 
-### With Cursor/Windsurf/Other IDEs
+Then create `.github/copilot-instructions.md` referencing the patterns.
 
-Reference the skill in your project rules:
-2. **Windsurf**: Add to `.windsurfrules`
-3. **Other**: Include relevant pattern files from `references/` in your context
+### With Cursor
+
+See [cursor-guide.md](getting-started/cursor-guide.md) for detailed setup. Quick start:
+
+```bash
+git clone https://github.com/zeromicro/zero-skills.git .ai-context/zero-skills
+```
+
+Then create `.cursorrules` referencing the patterns.
+
+### With Windsurf
+
+See [windsurf-guide.md](getting-started/windsurf-guide.md) for detailed setup. Quick start:
+
+```bash
+git clone https://github.com/zeromicro/zero-skills.git .ai-context/zero-skills
+```
+
+Then create `.windsurfrules` referencing the patterns.
 
 ## Integration with go-zero AI Ecosystem
 
@@ -166,15 +196,23 @@ zero-skills is part of a three-tool ecosystem for AI-assisted go-zero developmen
 - Uses: `ai-context` (in project rules) + links to `zero-skills`
 - Benefits: IDE-native experience with go-zero guidance
 
-See [Claude Code Guide](getting-started/claude-code-guide.md) for detailed integration instructions and best practices.
+See [Getting Started Guides](getting-started/) for detailed integration instructions for each tool.
 
 ## Quick Links
 
+**Skill Documentation:**
+
 - 📖 **[SKILL.md](SKILL.md)** - Main skill entry point and navigation
-- ⚡ **[QUICKSTART.md](QUICKSTART.md)** - Quick reference card
--  **[go-zero Quick Start](https://go-zero.dev/docs/quick-start)** - Official go-zero framework tutorial
-- 💡 **[Claude Code Guide](getting-started/claude-code-guide.md)** - Using zero-skills with Claude Code
+- 📚 **[go-zero Quick Start](https://go-zero.dev/docs/quick-start)** - Official go-zero framework tutorial
 - 🎯 **[Advanced Examples](skill-patterns/)** - Subagents, dynamic context, etc.
+
+**Getting Started Guides:**
+
+- 💡 **[Claude Code](getting-started/claude-code-guide.md)** - Full features, subagents (recommended)
+- 🖱️ **[Cursor](getting-started/cursor-guide.md)** - IDE integration with .cursorrules
+- 🤖 **[GitHub Copilot](getting-started/copilot-guide.md)** - VS Code inline suggestions
+- 🏄 **[Windsurf](getting-started/windsurf-guide.md)** - Cascade AI integration
+- 📋 **[Tool Comparison](getting-started/README.md)** - Compare all tools
 
 ## Contributing
 
