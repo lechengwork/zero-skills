@@ -16,6 +16,7 @@ description: |
   - Three-layer architecture enforcement
   - Production best practices
   - Common pitfall solutions
+license: MIT
 allowed-tools:
   - Read
   - Grep

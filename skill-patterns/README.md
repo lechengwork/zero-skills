@@ -226,7 +226,8 @@ Describe expected output format
 - [Claude Code Skills Documentation](https://code.claude.com/docs/en/skills)
 - [Agent Skills Specification](https://agentskills.io/)
 - [zero-skills Main Documentation](../SKILL.md)
-- [Claude Code Guide](../getting-started/claude-code-guide.md)- [go-zero Official Documentation](https://go-zero.dev)
+- [Claude Code Guide](../getting-started/claude-code-guide.md)
+- [go-zero Official Documentation](https://go-zero.dev)
 
 ## Contributing
 
