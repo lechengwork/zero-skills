@@ -1,29 +1,12 @@
 # Database Patterns
 
-## ⚠️ 本專案注意事項
-
-本專案部分資料表含複合主鍵，**不使用** `goctl model` 生成 Model，統一改用 GORM Gen：
-
-```bash
-# 在 common/models/tool/ 目錄下執行
-cd common/models/tool && go run gen_gorm.go
-```
-
-- 輸出 Model：`common/models/model/*.gen.go`
-- 輸出 Query：`common/models/query/*.gen.go`
-- 新增資料表：在 `gen_gorm.go` 的 `g.ApplyBasic(...)` 加入 `g.GenerateModel("表名")` 後重新執行
-
----
-
 ## SQL Database with go-zero
 
 go-zero provides `sqlx` and `sqlc` packages for SQL operations with built-in connection pooling, caching, and resilience.
 
 ## Basic SQL Operations Pattern
 
-### ✅ Model Generation from SQL（通用 go-zero 方式）
-
-> ⚠️ 本專案改用 GORM Gen，見上方說明。以下為 go-zero 標準做法，僅供參考。
+### ✅ Model Generation from SQL
 
 ```bash
 # Generate model from existing database
@@ -674,7 +657,7 @@ func (m *defaultUserModel) Delete(ctx context.Context, id string) error {
 ## Best Practices Summary
 
 ### ✅ DO:
-- Use `goctl` to generate models from database schema
+- Use `goctl` to generate models from database schema (or GORM Gen for composite primary key tables)
 - Always pass `context.Context` to database operations
 - Use transactions for operations that must be atomic
 - Enable caching for read-heavy models
